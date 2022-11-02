@@ -1,0 +1,20 @@
+defaults:
+  - _self_
+  - model: LogisticRegression
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled  
+
+dataset:
+  path: ml_project/data/raw/heart_cleveland_upload.csv
+  features: ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
+  target: 'condition'
+model_path: ml_project/models/model.pkl
+prediction_path: ml_project/output/predictions.csv
+test_path: ml_project/data/raw/heart_cleveland_upload.csv
+val_size: 0.1
+random_state: 42
+hydra:
+  output_subdir: null  
+  job:
+    chdir: False
+

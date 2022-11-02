@@ -1,0 +1,7 @@
+name: LogisticRegression
+scaler: None
+params:
+  penalty: 'l2'
+  C: 1.0
+  max_iter: 10000
+  verbose: 0
