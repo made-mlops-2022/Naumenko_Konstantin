@@ -3,6 +3,7 @@ from omegaconf import DictConfig
 import logging
 
 from utils import read_data, save_model
+import mlflow
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -55,6 +56,22 @@ def train(cfg: DictConfig):
         )
 
     pipe = Pipeline([('scaler', scaler), ('model', model)])
+
+    if cfg.ml_flow:
+        with mlflow.start_run():
+            mlflow.log_param("param1", 5)
+  
+            # log single key-value metric
+            mlflow.log_metric("foo", 2, step=1)
+            mlflow.log_metric("foo", 4, step=2)
+            mlflow.log_metric("foo", 6, step=3)
+            
+            with open("output.txt", "w") as f:
+                f.write("Hello world!")
+    
+            # logs local file or directory as artifact,
+            mlflow.log_artifact("output.txt")
+
     pipe.fit(X_train, y_train)
     val_score = pipe.score(X_val, y_val)
     print('acc:', val_score)
@@ -63,5 +80,4 @@ def train(cfg: DictConfig):
 
 
 if __name__ == '__main__':
-    # main()
     train()
