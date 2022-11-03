@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mis-knaumenko/Learning/MADE/MADE_mlops/Naumenko_Konstantin/mlruns/0/8e2ff88406b244a489c65359fc1bd75f/artifacts
+end_time: 1667480421587
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8e2ff88406b244a489c65359fc1bd75f
+run_name: placid-deer-309
+run_uuid: 8e2ff88406b244a489c65359fc1bd75f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1667480421577
+status: 3
+tags: []
+user_id: mis-knaumenko

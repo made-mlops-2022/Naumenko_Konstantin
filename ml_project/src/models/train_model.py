@@ -1,6 +1,7 @@
 import hydra
 from omegaconf import DictConfig
 import logging
+import os
 
 from utils import read_data, save_model
 import mlflow
@@ -56,25 +57,21 @@ def train(cfg: DictConfig):
         )
 
     pipe = Pipeline([('scaler', scaler), ('model', model)])
-
-    if cfg.ml_flow:
-        with mlflow.start_run():
-            mlflow.log_param("param1", 5)
-  
-            # log single key-value metric
-            mlflow.log_metric("foo", 2, step=1)
-            mlflow.log_metric("foo", 4, step=2)
-            mlflow.log_metric("foo", 6, step=3)
-            
-            with open("output.txt", "w") as f:
-                f.write("Hello world!")
-    
-            # logs local file or directory as artifact,
-            mlflow.log_artifact("output.txt")
-
     pipe.fit(X_train, y_train)
     val_score = pipe.score(X_val, y_val)
     print('acc:', val_score)
+
+    if cfg.ml_flow:
+        with mlflow.start_run():
+            mlflow.log_param("model", cfg.model.name)
+
+            # log single key-value metric
+            mlflow.log_metric("val_score", val_score, step=1)
+            mlflow.log_metric("val_score", val_score+1, step=2)
+            mlflow.log_metric("val_score", val_score+2, step=3)
+
+            # logs local file or directory as artifact,
+            mlflow.log_artifact("ml_project/configs/config.yaml")
 
     save_model(model, cfg.model_path)
 

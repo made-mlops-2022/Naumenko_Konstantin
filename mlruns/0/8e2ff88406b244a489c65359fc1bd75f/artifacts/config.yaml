@@ -1,0 +1,24 @@
+defaults:
+  - _self_
+  - model: LogisticRegression
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled  
+
+dataset:
+  download_link: https://storage.googleapis.com/kagglesdsdata/datasets/576697/1043970/heart_cleveland_upload.csv?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20221103%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20221103T110627Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=59630362d83687a97e94bf7bfdebbdd20076a530cb2bd398dd931546e320325878b0fb36f2acc15e55fe265a5b8dae760708b368dea009850a30db6022778f187de6052132c8dbfc1439ae8cc63de21a23a3ad27b3ecaf56317d9a066c22ceb3b40a07fe3e432652c8d708e34da7bfeab8439057df5cbe5a4ca5153c993311542ba40d0e28d80781f066ac937c7a787e236d7060445b61a4df2ad145c982e81998fd99097c381ea44a583a589a4c52612e751323a6101533780596b0cdb69b246face39285701aa38a611f1574544fb7c112cf86de0f07c1cf040475a074118d84348a17abaaddc9366c462af3c4bb284ff883ff0e33c16ac4190fb7fb35c83c
+  path: ml_project/data/raw/heart_cleveland_upload.csv
+  features: ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
+  target: 'condition'
+model_path: ml_project/models/model.pkl
+prediction_path: ml_project/output/predictions.csv
+test_path: ml_project/data/raw/heart_cleveland_upload.csv
+val_size: 0.1
+random_state: 42
+ml_flow: True
+hydra:
+  output_subdir: null  
+  job:
+    chdir: False
+  run:
+    dir: .
+

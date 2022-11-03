@@ -1,0 +1,15 @@
+artifact_uri: file:///home/mis-knaumenko/Learning/MADE/MADE_mlops/Naumenko_Konstantin/mlruns/0/2d7b9ad8ace9497782ea31ce40eebb12/artifacts
+end_time: 1667479818144
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2d7b9ad8ace9497782ea31ce40eebb12
+run_name: handsome-koi-41
+run_uuid: 2d7b9ad8ace9497782ea31ce40eebb12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1667479818135
+status: 4
+tags: []
+user_id: mis-knaumenko
