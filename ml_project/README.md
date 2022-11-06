@@ -3,6 +3,30 @@ ml_project
 
 mlops hw1
 
+Installation: 
+~~~
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+~~~
+Usage:
+~~~
+python src/models/train_model.py
+or
+python src/models/train_model.py cfg.model=LogisticRegression
+~~~
+To predict:
+~~~
+python src/models/predict_model.py cfg.prediction_path=ml_project/output/predictions.csv cfg.test_path=ml_project/data/raw/heart_cleveland_upload.csv
+~~~
+
+Test:
+~~~
+pytest tests/
+~~~
+
+
+
 Project Organization
 ------------
 

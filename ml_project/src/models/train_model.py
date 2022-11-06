@@ -1,24 +1,17 @@
-import hydra
-from omegaconf import DictConfig
 import logging
-import os
 
-from utils import read_data, save_model
+import hydra
 import mlflow
-from sklearn.linear_model import LogisticRegression
+from omegaconf import DictConfig
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from utils import read_data, save_model
 
 
-@hydra.main(version_base=None,
-            config_path='../../configs',
-            config_name='config'
-            )
-def main(cfg: DictConfig):
-    print()
-    print(cfg.model.params)
+logger = logging.getLogger('Train')
 
 
 @hydra.main(version_base=None,
@@ -26,6 +19,7 @@ def main(cfg: DictConfig):
             config_name='config'
             )
 def train(cfg: DictConfig):
+    logger.info(f"Start training, scaler:{cfg.model.scaler} model:{cfg.model.name}, params:{cfg.model.params}")
     X, y = read_data(
         cfg.dataset.path,
         cfg.dataset.features,
@@ -37,7 +31,7 @@ def train(cfg: DictConfig):
         test_size=cfg.val_size,
         random_state=cfg.random_state
     )
-
+    logger.info(f"Train data shape:{X_train.shape}, val data shape:{X_val.shape}")
     if cfg.model.scaler == 'StandardScaler':
         scaler = StandardScaler()
     elif cfg.model.scaler == 'MinMaxScaler':
@@ -59,21 +53,18 @@ def train(cfg: DictConfig):
     pipe = Pipeline([('scaler', scaler), ('model', model)])
     pipe.fit(X_train, y_train)
     val_score = pipe.score(X_val, y_val)
-    print('acc:', val_score)
+    logger.info(f"Validation score:{val_score}")
 
     if cfg.ml_flow:
+        logger.info(f"Metrics saved in mlflow")
         with mlflow.start_run():
             mlflow.log_param("model", cfg.model.name)
 
             # log single key-value metric
             mlflow.log_metric("val_score", val_score, step=1)
-            mlflow.log_metric("val_score", val_score+1, step=2)
-            mlflow.log_metric("val_score", val_score+2, step=3)
 
-            # logs local file or directory as artifact,
-            mlflow.log_artifact("ml_project/configs/config.yaml")
-
-    save_model(model, cfg.model_path)
+    save_model(pipe, cfg.model_path)
+    logger.info(f"Model saved in {cfg.model_path}")
 
 
 if __name__ == '__main__':
