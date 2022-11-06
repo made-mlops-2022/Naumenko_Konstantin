@@ -12,17 +12,20 @@ pip install -r requirements.txt
 Usage:
 ~~~
 python src/models/train_model.py
-or
-python src/models/train_model.py cfg.model=LogisticRegression
+python src/models/predict_model.py
 ~~~
-To predict:
+Also you can change configs/config.yaml or run script with parameters 
 ~~~
-python src/models/predict_model.py cfg.prediction_path=ml_project/output/predictions.csv cfg.test_path=ml_project/data/raw/heart_cleveland_upload.csv
+python src/models/train_model.py cfg.model=RandomForestClassifier cfg.model.scaler=StandardScaler
+python src/models/predict_model.py cfg.test_path=ml_project/data/raw/heart_cleveland_upload.csv cfg.prediction_path=ml_project/output/predictions.csv
 ~~~
+Avilable models: LogisticRegression, RandomForestClassifier
+Avilable scalers: StandardScaler, MinMaxScaler
+
 
 Test:
 ~~~
-pytest tests/
+python -m unittest discover src/tests
 ~~~
 
 
