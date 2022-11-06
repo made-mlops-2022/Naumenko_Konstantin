@@ -5,12 +5,12 @@ defaults:
 
 dataset:
   download_link: https://s188vla.storage.yandex.net/rdisk/e2334d351d0c1049a0223d36258f34d66ffb0d96e3f86dfa391ab1b4c7b132a8/63683bb9/3gDcPmRhNKse37ICicsRI0eU-lD2qIoCApUUx15-sI-hFBcdfPgOdFOQ9eyGtyKhd5P46SFNNJJ54JzldaHpWA==?uid=479512760&filename=heart_cleveland_upload.csv&disposition=attachment&hash=&limit=0&content_type=text%2Fplain&owner_uid=479512760&fsize=11106&hid=43396171dec5c41a7899fc4a9103113a&media_type=spreadsheet&tknv=v2&etag=267efedae75d6c27c54bffe9f2dcd445&rtoken=UFfWrHlsHPJ4&force_default=yes&ycrid=na-218c38d557be9e9e4593046a324f3863-downloader9f&ts=5ecd5394ba040&s=0a94ca0e4de9754de10b03949882cc45401cb51b52c9a3efec9be42a9f7cd5df&pb=U2FsdGVkX19UzPBvhv_uMMcEFlY4S5QqeZrHZvp_q5BqtIUWh2_Vn8OlqsFNMr0y9DNMXyod7NJHDB1Smm14h_KJYdqRj2rwpw70GlXYb70
-  path: ml_project/data/raw/heart_cleveland_upload.csv
+  path: data/raw/heart_cleveland_upload.csv
   features: ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
   target: 'condition'
-model_path: ml_project/models/model.pkl
-prediction_path: ml_project/output/predictions.csv
-test_path: ml_project/data/raw/heart_cleveland_upload.csv
+model_path: models/model.pkl
+prediction_path: output/predictions.csv
+test_path: data/raw/heart_cleveland_upload.csv
 val_size: 0.1
 random_state: 42
 ml_flow: False
