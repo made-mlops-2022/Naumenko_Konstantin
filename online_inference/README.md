@@ -15,7 +15,7 @@ From docker-hub:
 docker pull naumenkokm/server-classifier:v1
 docker run -p 8000:8000 naumenkokm/server-classifier:v1
 ~~~
-To check, that server works use:
+To check, that server works, go to:
 ~~~
 127.0.0.1:8000/health
 ~~~
